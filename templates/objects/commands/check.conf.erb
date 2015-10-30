@@ -1,0 +1,38 @@
+/* managed by puppet */
+
+<%= @is_template ? "template" : "object" %> CheckCommand "<%= @name %>" {
+
+<% if @templates -%>
+<%  @templates.each do |template| -%>
+  import "<%= template %>"
+<%  end -%>
+<% end -%>
+
+  <%= @execute ? "execute = \"#{execute}\"" : '' -%>
+
+  <%= @timeout ? "timeout = #{timeout}" : '' -%>
+
+  <%= @arguments ? "arguments = #{arguments}" : '' -%>
+
+<% if @command -%>
+  command = [
+  <% command.each do |cmd| -%>
+    PluginDir + "<%= cmd %>",
+  <% end -%>
+  ]
+<% end -%>
+
+<% if @vars -%>
+<%  @vars.each do |var,val| -%>
+<%# This hack is needed, because icinga2 has it's own hash/dict declaration -%> 
+<%   if val.is_a? Hash -%>
+  vars.<%= var %> = <%= val.to_s.sub('=>', '=') %>
+<%   else -%>
+  vars.<%= var %> = "<%= val %>"
+<%   end -%>
+<%  end -%>
+<% end -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */

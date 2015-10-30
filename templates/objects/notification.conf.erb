@@ -1,0 +1,66 @@
+/* managed by puppet */
+
+<% if @is_template -%>
+template Notification "<%= @name %>" {
+<% else -%>
+apply Notification "<%= @name %>" <%= @apply_to ? "to #{apply_to}" : '' %> {
+<% end -%>
+
+<% if @templates -%>
+<% @templates.each do |template| -%>
+  import "<%= template %>"
+<% end -%>
+<% end -%>
+
+<% if @groups -%>
+  groups = <%= @groups %>
+<% end -%>
+
+<% if @vars -%>
+<%  @vars.each do |var,val| -%>
+<%# This hack is needed, because icinga2 has it's own hash/dict declaration -%> 
+<%   if val.is_a? Hash -%>
+  vars.<%= var %> = <%= val.to_s.sub('=>', '=') %>
+<%   else -%>
+  vars.<%= var %> = "<%= val %>"
+<%   end -%>
+<%  end -%>
+<% end -%>
+
+  <%= @host_name ? "host_name = \"#{host_name}\"" : '' -%>
+
+  <%= @service_name ? "service_name = \"#{service_name}\"" : '' -%>
+  
+  <%= @users ? "users = #{users}" : '' -%>
+  
+  <%= @user_groups ? "user_groups = #{user_groups}" : '' -%>
+  
+  <%= @times ? "times = \"#{times}\"" : '' -%>
+  
+  <%= @command ? "command = \"#{command}\"" : '' -%>
+
+  <%= @interval ? "interval = \"#{interval}\"" : '' -%>
+
+  <%= @period ? "period = \"#{period}\"" : '' -%>
+
+  <%= @zone ? "zone = \"#{zone}\"" : '' -%>
+
+  <%= @types ? "types = #{types.to_s.gsub('"', '')}" : '' -%>
+  
+  <%= @states ? "states = #{states.to_s.gsub('"', '')}" : '' -%>
+
+<% if @assign -%>
+<% @assign.each do |assign_rule| -%>
+  assign where <%= assign_rule %>
+<% end -%>
+<% end -%>
+
+<% if @ignore -%>
+<% @ignore.each do |ignore_rule| -%>
+  ignore where <%= ignore_rule %>
+<% end -%>
+<% end -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */

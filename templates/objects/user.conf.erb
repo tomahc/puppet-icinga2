@@ -1,0 +1,44 @@
+/* managed by puppet */
+
+<%= @is_template ? "template" : "object" %> User "<%= @name %>" {
+<% if ! @is_template -%>
+  display_name = "<%= @display_name %>"
+<% end -%>
+
+<% if @templates -%>
+<% @templates.each do |template| -%>
+  import "<%= template %>"
+<% end -%>
+<% end -%>
+
+<% if @groups -%>
+  groups = <%= @groups %>
+<% end -%>
+
+<% if @vars -%>
+<%  @vars.each do |var,val| -%>
+<%# This hack is needed, because icinga2 has it's own hash/dict declaration -%> 
+<%   if val.is_a? Hash -%>
+  vars.<%= var %> = <%= val.to_s.sub('=>', '=') %>
+<%   else -%>
+  vars.<%= var %> = "<%= val %>"
+<%   end -%>
+<%  end -%>
+<% end -%>
+
+  <%= @email ? "email = \"#{email}\"" : '' -%>
+
+  <%= @pager ? "pager = \"#{pager}\"" : '' -%>
+
+  <%= @enable_notifications ? "enable_notifications = #{enable_notifications}" : '' -%>
+
+  <%= @period ? "period = \"#{period}\"" : '' -%>
+
+  <%= @types ? "types = #{types.to_s.gsub('"', '')}" : '' -%>
+  
+  <%= @states ? "states = #{states.to_s.gsub('"', '')}" : '' -%>
+
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */

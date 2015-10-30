@@ -1,0 +1,56 @@
+/* managed by puppet */
+
+<% if @is_template -%>
+template Service "<%= @name %>" {
+<% else -%>
+apply Service <%= @loop_condition ? "for ( #{name} => #{loop_condition} )" : "\"#{name}\"" %> {
+<% end -%>
+
+<% if ! @is_template -%>
+  <%= @display_name ? "display_name = \"#{display_name}\"" : '' -%>
+<% end -%>
+
+<% if @templates -%>
+<% @templates.each do |template| -%>
+  import "<%= template %>"
+<% end -%>
+<% end -%>
+
+  <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
+
+  <%= @max_check_attempts ? "max_check_attempts = #{max_check_attempts}" : '' -%>
+
+  <%= @check_interval ? "check_interval = #{check_interval}" : '' -%>
+
+  <%= @retry_interval ? "retry_interval = #{retry_interval}" : '' -%>
+
+<% if @groups -%>
+  groups = <%= @groups %>
+<% end -%>
+
+<% if @vars -%>
+<%  @vars.each do |var,val| -%>
+<%# This hack is needed, because icinga2 has it's own hash/dict declaration %> 
+<%   if val.is_a? Hash -%>
+  vars.<%= var %> = <%= val.to_s.sub('=>', '=') %>
+<%   else -%>
+  vars.<%= var %> = "<%= val %>"
+<%   end -%>
+<%  end -%>
+<% end -%>
+
+<% if @assign -%>
+<% @assign.each do |assign_rule| -%>
+  assign where <%= assign_rule %>
+<% end -%>
+<% end -%>
+
+<% if @ignore -%>
+<% @ignore.each do |ignore_rule| -%>
+  ignore where <%= ignore_rule %>
+<% end -%>
+<% end -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */

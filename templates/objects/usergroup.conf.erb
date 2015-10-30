@@ -1,0 +1,24 @@
+/* managed by puppet */
+
+object UserGroup "<%= @name %>" {
+  display_name = "<%= @display_name %>"
+
+<% if @groups -%>
+  groups = <%= @groups %>
+<% end -%>
+
+<% if @assign -%>
+<% @assign.each do |assign_rule| -%>
+  assign where <%= assign_rule %>
+<% end -%>
+<% end -%>
+
+<% if @ignore -%>
+<% @ignore.each do |ignore_rule| -%>
+  ignore where <%= ignore_rule %>
+<% end -%>
+<% end -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */
