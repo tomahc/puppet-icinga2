@@ -3,11 +3,15 @@
 <% if @is_template -%>
 template Service "<%= @name %>" {
 <% else -%>
-apply Service <%= @loop_condition ? "for ( #{name} => #{loop_condition} )" : "\"#{name}\"" %> {
+apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition} )" : "\"#{name}\"" %> {
 <% end -%>
 
 <% if ! @is_template -%>
   <%= @display_name ? "display_name = \"#{display_name}\"" : '' -%>
+<% end -%>
+
+<% if @loop_condition -%>
+  vars += config
 <% end -%>
 
 <% if @templates -%>
