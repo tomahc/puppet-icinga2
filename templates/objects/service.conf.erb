@@ -10,10 +10,6 @@ apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition
   <%= @display_name ? "display_name = \"#{display_name}\"" : '' -%>
 <% end -%>
 
-<% if @loop_condition -%>
-  vars += config
-<% end -%>
-
 <% if @templates -%>
 <% @templates.each do |template| -%>
   import "<%= template %>"
@@ -30,6 +26,10 @@ apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition
 
 <% if @groups -%>
   groups = <%= @groups %>
+<% end -%>
+
+<% if @loop_condition -%>
+  vars += config
 <% end -%>
 
 <% if @vars -%>
