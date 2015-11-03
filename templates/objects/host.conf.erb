@@ -30,9 +30,9 @@
 <%  @vars.each do |var,val| -%>
 <%# This hack is needed, because icinga2 has it's own hash/dict declaration -%> 
 <%   if val.is_a? Hash -%>
-  vars.<%= var %> = <%= val.to_s.sub('=>', '=') %>
+  vars.<%= var %> += <%= val.to_s.sub('=>', '=') %>
 <%   else -%>
-  vars.<%= var %> = "<%= val %>"
+  vars.<%= var %> += "<%= val %>"
 <%   end -%>
 <%  end -%>
 <% end -%>
