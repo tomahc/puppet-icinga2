@@ -29,26 +29,26 @@ Would return:
       arg2.push '{ '
 
       arg1.each do |k,v|
-      key = "\"#{k}\" ="
+        key = "\"#{k}\" ="
 
-      if not is_first
-        arg2.push ', '
+        if not is_first
+          arg2.push ', '
+        end
+
+        arg2.push key
+        if v.is_a? Hash
+          hash2ic.call(v, arg2)
+
+        elsif v.is_a? Array
+          arg2.push v.to_s
+
+        else
+          val = "\"#{v}\""
+          arg2.push val
+        end
+
+        is_first = false
       end
-
-      arg2.push key
-      if v.is_a? Hash
-        hash2ic.call(v, arg2)
-
-      elsif v.is_a? Array
-        arg2.push v.to_s
-
-      else
-        val = "\"#{v}\""
-        arg2.push val
-      end
-
-      is_first = false
-    end
 
       arg2.push '} '
     end
