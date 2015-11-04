@@ -12,6 +12,14 @@
 <% end -%>
 <% end -%>
 
+<% if @groups -%>
+  groups = <%= @groups %>
+<% end -%>
+
+<% if @vars -%>
+  vars += <%= scope.function_hash2ic([@vars, []]).join(' ') %>
+<% end -%>
+
   <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
 
   <%= @max_check_attempts ? "max_check_attempts = #{max_check_attempts}" : '' -%>
@@ -22,20 +30,6 @@
 
   <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
 
-<% if @groups -%>
-  groups = <%= @groups %>
-<% end -%>
-
-<% if @vars -%>
-<%  @vars.each do |var,val| -%>
-<%# This hack is needed, because icinga2 has it's own hash/dict declaration -%> 
-<%   if val.is_a? Hash -%>
-  vars.<%= var %> += <%= val.to_s.gsub('=>', '=') %>
-<%   else -%>
-  vars.<%= var %> += "<%= val %>"
-<%   end -%>
-<%  end -%>
-<% end -%>
 }
 
 

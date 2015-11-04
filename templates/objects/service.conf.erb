@@ -16,14 +16,6 @@ apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition
 <% end -%>
 <% end -%>
 
-  <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
-
-  <%= @max_check_attempts ? "max_check_attempts = #{max_check_attempts}" : '' -%>
-
-  <%= @check_interval ? "check_interval = #{check_interval}" : '' -%>
-
-  <%= @retry_interval ? "retry_interval = #{retry_interval}" : '' -%>
-
 <% if @groups -%>
   groups = <%= @groups %>
 <% end -%>
@@ -33,15 +25,16 @@ apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition
 <% end -%>
 
 <% if @vars -%>
-<%  @vars.each do |var,val| -%>
-<%# This hack is needed, because icinga2 has it's own hash/dict declaration %> 
-<%   if val.is_a? Hash -%>
-  vars.<%= var %> += <%= val.to_s.gsub('=>', '=') %>
-<%   else -%>
-  vars.<%= var %> += "<%= val %>"
-<%   end -%>
-<%  end -%>
+  vars += <%= scope.function_hash2ic([@vars, []]).join(' ') %>
 <% end -%>
+
+  <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
+
+  <%= @max_check_attempts ? "max_check_attempts = #{max_check_attempts}" : '' -%>
+
+  <%= @check_interval ? "check_interval = #{check_interval}" : '' -%>
+
+  <%= @retry_interval ? "retry_interval = #{retry_interval}" : '' -%>
 
 <% if @assign -%>
 <% @assign.each do |assign_rule| -%>
