@@ -1,0 +1,14 @@
+/* managed by puppet */
+
+<%= @plugindir ? "const PluginDir = \"#{plugindir}\"" : "// const PluginDir =" %>
+
+<%= @manubulonplugindir ? "const ManubulonPluginDir = \"#{manubulonplugindir}\"" : "// const ManubulonPluginDir =" %>
+
+<%= @plugincontribdir ? "const PluginContribDir = \"#{plugincontribdir}\"" : "// const PluginContribDir =" %>
+
+<%= @zonename ? "const ZoneName = #{zonename}" : "// const ZoneName =" %>
+
+<%= @ticketsalt ? "const TicketSalt = \"#{ticketsalt}\"" : "// const TicketSalt =" %>
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */
