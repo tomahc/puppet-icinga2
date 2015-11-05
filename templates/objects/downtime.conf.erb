@@ -1,0 +1,39 @@
+/* managed by puppet */
+
+apply ScheduledDowntime "<%= @name %>" to <%= @apply_to %> {
+
+  <%= @host_name ? "host_name = \"#{host_name}\"" : '' -%>
+
+  <%= @service_name ? "service_name = \"#{service_name}\"" : '' -%>
+  
+  author = "<%= @author -%>"
+  
+  comment = "<%= @comment -%>"
+
+  <%= @fixed ? "fixed = \"#{fixed}\"" : '' -%>
+
+  <%= @duration ? "duration = \"#{duration}\"" : '' -%>
+
+<% if @ranges -%>
+  ranges = {
+<%  ranges.each do |var,val| -%>
+    "<%= var %>" = "<%= val %>",
+<%  end -%>
+  }
+<% end -%>
+
+<% if @assign -%>
+<%  @assign.each do |assign_rule| -%>
+  assign where <%= assign_rule %>
+<%  end -%>
+<% end -%>
+
+<% if @ignore -%>
+<%  @ignore.each do |ignore_rule| -%>
+  ignore where <%= ignore_rule %>
+<%  end -%>
+<% end -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */

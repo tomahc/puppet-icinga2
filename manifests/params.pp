@@ -16,6 +16,7 @@ class icinga2::params {
   $command_configs                        = 'commands.d'
   $timeperiod_configs                     = 'timeperiods.d'
   $dependency_configs                     = 'dependencies.d'
+  $downtime_configs                       = 'downtimes.d'
 
   $server_config_template                 = 'icinga2/server/icinga2.conf.erb'
 
