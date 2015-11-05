@@ -1,7 +1,0 @@
-host_name	Required. The name of the host this scheduled downtime belongs to.
-service_name	Optional. The short name of the service this scheduled downtime belongs to. If omitted this downtime object is treated as host downtime.
-author	Required. The author of the downtime.
-comment	Required. A comment for the downtime.
-fixed	Optional. Whether this is a fixed downtime. Defaults to true.
-duration	Optional. How long the downtime lasts. Only has an effect for flexible (non-fixed) downtimes.
-ranges	Required. A dic
