@@ -1,0 +1,37 @@
+/* managed by puppet */
+
+apply Dependency "<%= @name %>" to <%= @apply_to %> {
+
+  <%= @parent_host_name ? "parent_host_name = \"#{parent_host_name}\"" : '' -%>
+
+  <%= @parent_service_name ? "parent_service_name = \"#{parent_service_name}\"" : '' -%>
+  
+  <%= @child_host_name ? "child_host_name = \"#{child_host_name}\"" : '' -%>
+  
+  <%= @child_service_name ? "child_service_name = \"#{child_service_name}\"" : '' -%>
+  
+  disable_checks = <%= @disable_checks -%>
+  
+  disable_notifications = <%= @disable_notifications -%>
+
+  ignore_soft_states = <%= @ignore_soft_states -%>
+
+  <%= @states ? "states = #{states.to_s.gsub('"', '')}" : "states = #{type_state.to_s.gsub('"', '')}" -%>
+
+  <%= @period ? "period = \"#{period}\"" : '' -%>
+
+<% if @assign -%>
+<% @assign.each do |assign_rule| -%>
+  assign where <%= assign_rule %>
+<% end -%>
+<% end -%>
+
+<% if @ignore -%>
+<% @ignore.each do |ignore_rule| -%>
+  ignore where <%= ignore_rule %>
+<% end -%>
+<% end -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */
