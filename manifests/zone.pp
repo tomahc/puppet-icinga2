@@ -1,10 +1,7 @@
 define icinga2::zone (
   $ensure,
 
-  $is_template              = false,
-  $templates                = undef,
-
-  $enpoints                 = undef,
+  $endpoints                = undef,
   $parent                   = undef,
   $global                   = undef,
 

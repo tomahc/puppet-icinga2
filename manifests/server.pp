@@ -18,7 +18,8 @@ class icinga2::server (
   $command_configs            = $icinga2::params::command_configs,
   $timeperiod_configs         = $icinga2::params::timeperiod_configs,
   $dependency_configs         = $icinga2::params::dependency_configs,
-  $downtime_configs         = $icinga2::params::downtime_configs,
+  $downtime_configs           = $icinga2::params::downtime_configs,
+  $zone_configs           = $icinga2::params::zone_configs,
 
   $hostgroup_configs          = $icinga2::params::hostgroup_configs,
   $usergroup_configs          = $icinga2::params::usergroup_configs,
@@ -52,6 +53,7 @@ class icinga2::server (
   icinga2::server::paths { $timeperiod_configs: }
   icinga2::server::paths { $dependency_configs: }
   icinga2::server::paths { $downtime_configs: }
+  icinga2::server::paths { $zone_configs: }
 
   service { $service:
     ensure  => running,

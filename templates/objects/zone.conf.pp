@@ -1,17 +1,12 @@
 /* managed by puppet */
 
-<%= @is_template ? "template" : "object" %> Zone "<%= @name %>" {
+object Zone "<%= @name %>" {
 
-  <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
+  <%= @endpoints ? "endpoints = \"#{endpoints.to_s}\"" : '' -%>
 
-  <%= @max_check_attempts ? "max_check_attempts = #{max_check_attempts}" : '' -%>
+  <%= @parent ? "parent = \"#{parent}\"" : '' -%>
 
-  <%= @check_interval ? "check_interval = #{check_interval}" : '' -%>
-
-  <%= @retry_interval ? "retry_interval = #{retry_interval}" : '' -%>
-
-  <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
-
+  <%= @global ? "global = #{global}" : '' -%>
 }
 
 
