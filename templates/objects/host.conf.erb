@@ -4,6 +4,10 @@
 <% if ! @is_template -%>
   display_name = "<%= @display_name %>"
   address = "<%= @address %>"
+
+<% if @remote_client -%>
+  vars.remote_client = "<%= @remote_client %>"
+<% end -%>
 <% end -%>
 
 <% if @templates -%>
@@ -18,10 +22,6 @@
 
 <% if @vars -%>
   vars += <%= scope.function_hash2ic([@vars, []]).join(' ') %>
-<% end -%>
-
-<% if @remote_client -%>
-  vars.remote_client = "<%= @remote_client %>"
 <% end -%>
 
   <%= @check_command ? "check_command = \"#{check_command}\"" : '' -%>
