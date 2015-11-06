@@ -4,6 +4,8 @@ define icinga2::host (
   $is_template              = false,
   $templates                = undef,
 
+  $remote_client            = $name,
+
   $display_name             = $name,
   $address                  = $::ipaddress,
   $check_command            = undef,
