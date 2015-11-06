@@ -4,7 +4,7 @@ define icinga2::endpoint (
   $host                     = undef,
   $port                     = undef,
 
-  $zone_configs             = $icinga2::server::zone_configs,
+  $endpoint_configs         = $icinga2::server::endpoint_configs,
   $service                  = $icinga2::server::service,
 
 ) {
@@ -15,18 +15,12 @@ define icinga2::endpoint (
     default               => fail("No such option: ${ensure}"),
   }
 
-  $real_configs = $is_template ? {
-    true    => $icinga2::server::template_configs,
-    false   => $zone_configs,
-    default => fail("No such option: ${is_template}"),
-  }
-
-  file { "${icinga2::params::confdir}/${real_configs}/${name}.conf":
+  file { "${icinga2::params::confdir}/${endpoint_configs}/${name}.conf":
     ensure  => $real_ensure,
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => template('icinga2/objects/zone.conf.erb'),
+    content => template('icinga2/objects/endpoint.conf.erb'),
     notify  => Service[$service],
   }
 }
