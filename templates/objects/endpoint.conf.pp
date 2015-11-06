@@ -1,0 +1,11 @@
+/* managed by puppet */
+
+object Endpoint "<%= @name %>" {
+
+  <%= @host ? "host = \"#{host}\"" : '' -%>
+
+  <%= @port ? "port = \"#{port}\"" : '' -%>
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */

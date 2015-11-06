@@ -18,6 +18,7 @@ class icinga2::params {
   $dependency_configs                     = 'dependencies.d'
   $downtime_configs                       = 'downtimes.d'
   $zone_configs                           = 'zones.d'
+  $endpoint_configs                       = 'endpoints.d'
 
   $server_config_template                 = 'icinga2/server/icinga2.conf.erb'
 
