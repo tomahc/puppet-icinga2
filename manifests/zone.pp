@@ -16,13 +16,7 @@ define icinga2::zone (
     default               => fail("No such option: ${ensure}"),
   }
 
-  $real_configs = $is_template ? {
-    true    => $icinga2::server::template_configs,
-    false   => $zone_configs,
-    default => fail("No such option: ${is_template}"),
-  }
-
-  file { "${icinga2::params::confdir}/${real_configs}/${name}.conf":
+  file { "${icinga2::params::confdir}/${zone_configs}/${name}.conf":
     ensure  => $real_ensure,
     owner   => root,
     group   => root,
