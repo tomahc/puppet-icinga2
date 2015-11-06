@@ -5,8 +5,10 @@ define icinga2::service (
   $templates                = undef,
   $loop_condition           = undef,
 
+  $command_endpoint         = undef,
   $assign                   = undef,
   $ignore                   = undef,
+
 
   $display_name             = $name,
   $groups                   = undef,

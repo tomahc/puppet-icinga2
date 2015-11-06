@@ -16,6 +16,10 @@ apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition
 <% end -%>
 <% end -%>
 
+<% if @command_endpoint -%>
+  command_endpoint = <%= @command_endpoint %>
+<% end -%>
+
 <% if @groups -%>
   groups = <%= @groups %>
 <% end -%>
