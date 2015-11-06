@@ -2,7 +2,7 @@
 
 object Zone "<%= @name %>" {
 
-  <%= @endpoints ? "endpoints = \"#{endpoints.to_s}\"" : '' -%>
+  <%= @endpoints ? "endpoints = #{endpoints.to_s}" : '' -%>
 
   <%= @parent ? "parent = \"#{parent}\"" : '' -%>
 
