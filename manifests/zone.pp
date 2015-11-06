@@ -1,7 +1,7 @@
 define icinga2::zone (
   $ensure,
 
-  $endpoints                = undef,
+  $endpoints                = [ $name ],
   $parent                   = undef,
   $global                   = undef,
 
