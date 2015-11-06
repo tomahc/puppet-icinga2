@@ -1,19 +1,21 @@
-define icinga2::downtime (
+define icinga2::dependency (
   $ensure,
 
   $apply_to,
   $assign                   = undef,
   $ignore                   = undef,
 
-  $host_name                = undef,
-  $service_name             = undef,
-  $author                   = 'icinga2',
-  $comment                  = 'Generic Comment',
-  $fixed                    = undef,
-  $duration                 = undef,
-  $ranges                   = undef,
+  $parent_host_name         = undef,
+  $parent_service_name      = undef,
+  $child_host_name          = undef,
+  $child_service_name       = undef,
+  $disable_checks           = false,
+  $disable_notifications    = true,
+  $ignore_soft_states       = true,
+  $period                   = undef,
+  $states                   = undef,
 
-  $downtime_configs         = $icinga2::server::downtime_configs,
+  $dependency_configs       = $icinga2::server::dependency_configs,
   $service                  = $icinga2::server::service,
 ) {
 
@@ -29,12 +31,12 @@ define icinga2::downtime (
     default   => fail("No such option: ${apply_to}"),
   }
 
-  file { "${icinga2::params::confdir}/${downtime_configs}/${name}.conf":
+  file { "${icinga2::params::confdir}/${dependency_configs}/${name}.conf":
     ensure  => $real_ensure,
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => template('icinga2/objects/downtime.conf.erb'),
+    content => template('icinga2/objects/dependency.conf.erb'),
     notify  => Service[$service],
   }
 }

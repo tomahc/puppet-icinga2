@@ -6,6 +6,7 @@ class icinga2::constants (
   $plugincontribdir     = undef,
   $zonename             = undef,
   $ticketsalt           = undef,
+  $nodename             = undef,
 
   $service              = $icinga2::server::service,
 ) {
