@@ -1,12 +1,16 @@
-class icinga2::params {
+class icinga2::params inherits icinga2::globals {
   $server_package                         = 'icinga2'
   $server_service                         = 'icinga2'
-  $server_user                            = 'nagios'
-  $confdir                                = '/etc/icinga2'
+  $service_user                           = 'nagios'
+  $service_group                          = 'nagios'
+  $confdir                                = $icinga2::globals::confdir
   $server_config                          = "${confdir}/icinga2.conf"
 
-  $server_config_include                  = ['constants.conf', 'zones.conf', 'features-enabled/*.conf']
-  $server_config_include_recursive        = ['repository.d', 'conf.d']
+  $include_files                          = $icinga2::globals::include_files
+  $include_directories                    = $icinga2::globals::include_directories
+
+  $is_master                              = true
+  $use_puppet_ca                          = true
 
   $template_configs                       = 'templates.d'
   $host_configs                           = 'hosts.d'

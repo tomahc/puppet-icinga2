@@ -3,10 +3,14 @@ class icinga2::server (
   $service                    = $icinga2::params::server_service,
   $config                     = $icinga2::params::server_config,
   $confdir                    = $icinga2::params::confdir,
-  $user                       = $icinga2::params::server_user,
+  $user                       = $icinga2::params::service_user,
+  $group                      = $icinga2::params::service_group,
 
-  $include_files              = $icinga2::params::server_config_include,
-  $include_directories        = $icinga2::params::server_config_include_recursive,
+  $is_master                  = $icinga2::params::is_master,
+  $use_puppet_ca              = $icinga2::params::use_puppet_ca,
+
+  $include_files              = $icinga2::params::include_files,
+  $include_directories        = $icinga2::params::include_directories,
 
   $server_config_template     = $icinga2::params::server_config_template,
 
