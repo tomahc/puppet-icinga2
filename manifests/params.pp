@@ -1,8 +1,8 @@
 class icinga2::params inherits icinga2::globals {
-  $server_package                         = 'icinga2'
-  $server_service                         = 'icinga2'
-  $service_user                           = 'nagios'
-  $service_group                          = 'nagios'
+  $server_package                         = $icinga2::globals::server_package
+  $server_service                         = $icinga2::globals::server_service
+  $service_user                           = $icinga2::globals::service_user
+  $service_group                          = $icinga2::globals::service_group
   $confdir                                = $icinga2::globals::confdir
   $server_config                          = "${confdir}/icinga2.conf"
 
@@ -29,5 +29,13 @@ class icinga2::params inherits icinga2::globals {
   $hostgroup_configs                      = 'hostgroups.d'
   $usergroup_configs                      = 'usergroups.d'
   $servicegroup_configs                   = 'servicegroups.d'
+
+  # constants
+  $plugindir                              = $icinga2::globals::plugindir
+  $manubulonplugindir                     = $icinga2::globals::manubulonplugindir
+  $plugincontribdir                       = $icinga2::globals::plugincontribdir
+  $zonename                               = $icinga2::globals::zonename
+  $ticketsalt                             = $icinga2::globals::ticketsalt
+  $nodename                               = $icinga2::globals::nodename
 
 }

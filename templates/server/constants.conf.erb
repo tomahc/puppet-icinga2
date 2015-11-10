@@ -6,7 +6,13 @@
 
 <%= @plugincontribdir ? "const PluginContribDir = \"#{plugincontribdir}\"" : "// const PluginContribDir =" %>
 
-<%= @zonename ? "const ZoneName = #{zonename}" : "// const ZoneName =" %>
+<% if @zonename -%>
+<%  if scope.function_is_fqdn([@zonename]) -%>
+const ZoneName = "<%= @zonename %>"
+<%  else -%>
+const ZoneName = <%= @zonename %>
+<%  end -%>
+<% end -%>
 
 <%= @nodename ? "const NodeName = \"#{nodename}\"" : "// const NodeName =" %>
 
