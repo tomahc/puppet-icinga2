@@ -21,8 +21,8 @@ Would return:
     raise(Puppet::ParseError, "request_ticket(): Wrong number of arguments " +
       "given (#{arguments.size}: at least 1)") if arguments.size == 0
 
-    master = arguments[0]
-    cn = arguments[1]
+    # master = arguments[0]
+    cn = arguments[0]
 
     stdin, stdout, stderr = Open3.popen3("sudo -H -u nagios icinga2 pki ticket --cn \'#{cn}\' 2>&1")
     return stdout.readlines.join(' ').gsub("\n", '')
