@@ -1,4 +1,4 @@
-define icinga2::ido (
+define icinga2::feature::ido (
   $ensure,
 
   $type,

@@ -1,4 +1,4 @@
-class icinga2::api (
+class icinga2::feature::api (
   $ensure,
 
   $cert_path                = $icinga2::params::cert_path,
