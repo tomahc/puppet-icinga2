@@ -1,0 +1,18 @@
+/* managed by puppet */
+
+library "<%= @library %>"
+
+object <%= @object ? "#{object}" : 'IdoMysqlConnection' %> "ido-mysql" {
+
+  <%= @user ? "user = \"#{user}\"" : '// user =' -%>,
+
+  <%= @password ? "password = \"#{password}\"" : '// password =' -%>,
+
+  <%= @host ? "host = \"#{host}\"" : '// host =' -%>
+
+  <%= @database ? "database = \"#{database}\"" : '// database =' -%>
+
+}
+
+
+/* vim: set ts=2 sts=2 sw=2 et : */
