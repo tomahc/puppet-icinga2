@@ -39,6 +39,14 @@ class icinga2::server::cert (
     source => "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
   }
 
+  file  { 'copy-puppet-ca':
+    ensure => $real_ensure,
+    path   => "${confdir}/pki/ca.crt",
+    owner  => 'nagios',
+    group  => 'nagios',
+    source => "/var/lib/puppet/ssl/certs/ca.pem",
+  }
+
   if $is_master {
 
     file { '/var/lib/icinga2/ca':
@@ -48,7 +56,7 @@ class icinga2::server::cert (
       mode   => '0755',
     }->
 
-    exec { 'copy-master-ca':
+    exec { 'save-master-ca':
       path    => [ '/bin', '/usr/bin', '/usr/sbin' ],
       command => "sudo -H -u nagios cp ${confdir}/pki/ca.crt /var/lib/icinga2/ca/ca.crt",
       unless  => "diff ${confdir}/pki/ca.crt /var/lib/icinga2/ca/ca.crt",
@@ -56,14 +64,6 @@ class icinga2::server::cert (
   } else {
 
     $ticket = request_ticket('puppet.local.inovex.de')
-
-    file  { 'copy-puppet-ca':
-      ensure => $real_ensure,
-      path   => "${confdir}/pki/ca.crt",
-      owner  => 'nagios',
-      group  => 'nagios',
-      source => "/var/lib/puppet/ssl/certs/ca.pem",
-    }->
 
     exec { 'request-master-cert':
       path    => [ '/usr/sbin', '/usr/bin' ],
