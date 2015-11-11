@@ -23,7 +23,7 @@ class icinga2::api (
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => template('icinga2/objects/api.conf.erb'),
+    content => template('icinga2/objects/feature/api.conf.erb'),
     notify  => Service[$service],
   }
 }

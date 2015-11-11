@@ -62,7 +62,7 @@ class icinga2::client (
     master              => $master_endpoint,
   }
 
-  class { 'icinga2::api':
+  class { 'icinga2::feature::api':
     ensure          => present,
     accept_commands => true,
   }

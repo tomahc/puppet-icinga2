@@ -51,22 +51,6 @@ class icinga2::server (
 
   icinga2::server::paths { $include_directories: }
 
-  #icinga2::server::paths { $hostgroup_configs: }
-  #icinga2::server::paths { $usergroup_configs: }
-  #icinga2::server::paths { $servicegroup_configs: }
-
-  #icinga2::server::paths { $template_configs: }
-  #icinga2::server::paths { $host_configs: }
-  #icinga2::server::paths { $user_configs: }
-  #icinga2::server::paths { $service_configs: }
-  #icinga2::server::paths { $notification_configs: }
-  #icinga2::server::paths { $command_configs: }
-  #icinga2::server::paths { $timeperiod_configs: }
-  #icinga2::server::paths { $dependency_configs: }
-  #icinga2::server::paths { $downtime_configs: }
-  #icinga2::server::paths { $zone_configs: }
-  #icinga2::server::paths { $endpoint_configs: }
-
   if $use_puppet_ca {
     class { 'icinga2::server::cert':
       ensure    => present,

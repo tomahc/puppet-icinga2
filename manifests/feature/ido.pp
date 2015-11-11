@@ -37,7 +37,7 @@ define icinga2::ido (
     owner   => 'nagios',
     group   => 'nagios',
     mode    => '0640',
-    content => template('icinga2/objects/ido.conf.erb'),
+    content => template('icinga2/objects/feature/ido.conf.erb'),
     notify  => Service[$service],
   }
 }
