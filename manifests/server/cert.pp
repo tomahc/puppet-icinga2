@@ -69,7 +69,7 @@ class icinga2::server::cert (
       path    => [ '/usr/sbin', '/usr/bin' ],
       command => "sudo -H -u nagios icinga2 pki save-cert --key ${confdir}/pki/${::fqdn}.key --cert ${confdir}/pki/${::fqdn}.crt --trustedcert ${confdir}/pki/trusted-master.crt --host ${master}",
       creates => "${confdir}/pki/trusted-master.crt",
-    }->
+    }
 
     # Resignig the already signed cert results in loosing the client cert on the 1st puppet run.
     # A 2nd puppet run will recopy the signed puppet agent cert and resign it. It is reproducable by copying the puppet agents key and cert and run `icinga pki request` manually.

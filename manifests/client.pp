@@ -61,4 +61,9 @@ class icinga2::client (
     use_puppet_ca       => true,
     master              => $master_endpoint,
   }
+
+  class { 'icinga2::api':
+    ensure          => present,
+    accept_commands => true,
+  }
 }

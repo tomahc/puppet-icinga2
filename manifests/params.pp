@@ -38,4 +38,11 @@ class icinga2::params inherits icinga2::globals {
   $ticketsalt                             = $icinga2::globals::ticketsalt
   $nodename                               = $icinga2::globals::nodename
 
+
+  # api
+  $cert_path                              = 'SysconfDir + "/icinga2/pki/" + NodeName + ".crt"'
+  $key_path                               = 'SysconfDir + "/icinga2/pki/" + NodeName + ".key"'
+  $ca_path                                = 'SysconfDir + "/icinga2/pki/ca.crt"'
+  $accept_commands                        = true
+  $ticket_salt                            = 'TicketSalt'
 }
