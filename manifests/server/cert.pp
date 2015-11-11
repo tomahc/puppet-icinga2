@@ -90,9 +90,12 @@ class icinga2::server::cert (
     #  creates => "${confdir}/pki/ca.crt",
     #}->
 
-    exec { "${::fqdn}-endpoint":
-      path    => [ '/usr/sbin', '/usr/bin' ],
-      command => "sudo -H -u nagios icinga2 node setup --endpoint ${::fqdn} --zone ${::fqdn} --master_host ${master} --trustedcert ${confdir}/pki/trusted-master.crt --ticket ${ticket}",
-    }
+    # since the signed puppet agent certicate is being used, the icinga2 agent does not need to call "node setup", which would result in requesting the master ca and resigning the client cert. 
+    # however: placeholder for future implementation of self-signed certs
+
+    #exec { "${::fqdn}-endpoint":
+    #  path    => [ '/usr/sbin', '/usr/bin' ],
+    #  command => "sudo -H -u nagios icinga2 node setup --endpoint ${::fqdn} --zone ${::fqdn} --master_host ${master} --trustedcert ${confdir}/pki/trusted-master.crt --ticket ${ticket}",
+    #}
   }
 }
