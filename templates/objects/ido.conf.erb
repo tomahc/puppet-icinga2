@@ -8,7 +8,7 @@ object <%= @object ? "#{object}" : 'IdoMysqlConnection' %> "ido-mysql" {
 
   <%= @password ? "password = \"#{password}\"" : '// password =' -%>,
 
-  <%= @host ? "host = \"#{host}\"" : '// host =' -%>
+  <%= @host ? "host = \"#{host}\"" : '// host =' -%>,
 
   <%= @database ? "database = \"#{database}\"" : '// database =' -%>
 
