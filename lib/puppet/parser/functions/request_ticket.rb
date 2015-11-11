@@ -8,13 +8,13 @@ module Puppet::Parser::Functions
 Returns a icinga2 dictionary/hash
 *Examples:*
 
-    request_ticket( { 'key' => 'value', 'nested' => { 'key' => 'value' } }, [] )
+    request_ticket( 'icinga2.master.tld' )
 
 Would return:
 
-    { "key" = "value", "nested" = { "key" = "value" } }
+    5TdVV5wFn2InPRK1hPvZvwKHhGdGoY8qkgcD1sfLYJq44qN1
 
-    ...which is icing2s' dictionary/hash syntax
+    ...which is your icinga2 clients ticket
     EOS
   ) do |arguments|
 
