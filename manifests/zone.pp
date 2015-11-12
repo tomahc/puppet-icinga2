@@ -13,7 +13,7 @@ define icinga2::zone (
   $real_ensure = $ensure ? {
     /(true|present|file)/ => 'file',
     /(false|absent)/      => 'absent',
-    default               => fail("No such option: ${ensure}"),
+    default               => 'file',
   }
 
   file { "${icinga2::params::confdir}/${zone_configs}/${name}.conf":

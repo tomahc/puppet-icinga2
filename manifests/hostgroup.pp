@@ -14,7 +14,7 @@ define icinga2::hostgroup (
   $real_ensure = $ensure ? {
     /(true|present|file)/ => 'file',
     /(false|absent)/      => 'absent',
-    default               => fail("No such option: ${ensure}"),
+    default               => 'file',
   }
 
   file { "${icinga2::params::confdir}/${hostgroup_configs}/${name}.conf":

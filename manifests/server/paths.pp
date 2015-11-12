@@ -9,7 +9,7 @@ define icinga2::server::paths (
   $real_ensure = $ensure ? {
     /(true|present|directory)/ => 'directory',
     /(false|absent)/           => 'absent',
-    default                    => fail("No such option: ${ensure}"),
+    default                    => 'directory',
   }
 
   # make sure config direcories exist

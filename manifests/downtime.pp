@@ -20,13 +20,19 @@ define icinga2::downtime (
   $real_ensure = $ensure ? {
     /(true|present|file)/ => 'file',
     /(false|absent)/      => 'absent',
-    default               => fail("No such option: ${ensure}"),
+    default               => 'file',
   }
 
-  $type_state = $apply_to ? {
-    'Host'    => [ 'Up' ],
-    'Service' => [ 'OK', 'Warning' ],
-    default   => fail("No such option: ${apply_to}"),
+  case $apply_to {
+    'Host': {
+      $type_state = [ 'Up' ]
+    }
+    'Service': {
+      $type_state = [ 'OK', 'Warning' ]
+    }
+    default: {
+      fail("Invalid option: $apply_to"}
+    }
   }
 
   file { "${icinga2::params::confdir}/${downtime_configs}/${name}.conf":

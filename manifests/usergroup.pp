@@ -14,7 +14,7 @@ define icinga2::usergroup (
   $real_ensure = $ensure ? {
     /(true|present|file)/ => 'file',
     /(false|absent)/      => 'absent',
-    default               => fail("No such option: ${ensure}"),
+    default               => 'file',
   }
 
   file { "${icinga2::params::confdir}/${usergroup_configs}/${name}.conf":

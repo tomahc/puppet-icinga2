@@ -21,13 +21,13 @@ define icinga2::user (
   $real_ensure = $ensure ? {
     /(true|present|file)/ => 'file',
     /(false|absent)/      => 'absent',
-    default               => fail("No such option: ${ensure}"),
+    default               => 'file',
   }
 
   $real_configs = $is_template ? {
     true    => $icinga2::server::template_configs,
     false   => $user_configs,
-    default => fail("No such option: ${is_template}"),
+    default => $user_configs,
   }
 
   file { "${icinga2::params::confdir}/${real_configs}/${name}.conf":
