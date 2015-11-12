@@ -1,16 +1,5 @@
 define icinga2::dependency (
-  $ensurme.pp
-  endpoint.pp
-  feature.pp
-  host.pp
-  hostgroup.pp
-  notification.pp
-  service.pp
-  servicegroup.pp
-  timeperiod.pp
-  user.pp
-  usergroup.pp
-  zone.ppe,
+  $ensure,
 
   $apply_to,
   $assign                   = undef,
