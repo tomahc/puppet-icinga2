@@ -34,7 +34,7 @@
 
   <%= @check_period ? "check_period = \"#{check_period}\"" : '' -%>
 
-  <%= @enable_notifications ? "enable_notifications = #{enable_notifications}" : '' -%>
+  enable_notifications = <%= @enable_notifications %>
 
 }
 

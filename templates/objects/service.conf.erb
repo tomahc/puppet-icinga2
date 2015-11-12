@@ -40,7 +40,7 @@ apply Service <%= @loop_condition ? "for ( #{name} => config in #{loop_condition
 
   <%= @retry_interval ? "retry_interval = #{retry_interval}" : '' -%>
 
-  <%= @enable_notifications ? "enable_notifications = #{enable_notifications}" : '' -%>
+  enable_notifications = <%= @enable_notifications %>
 
 <% if @assign -%>
 <% @assign.each do |assign_rule| -%>

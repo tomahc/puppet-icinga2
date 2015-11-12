@@ -23,13 +23,13 @@
 
   <%= @pager ? "pager = \"#{pager}\"" : '' -%>
 
-  <%= @enable_notifications ? "enable_notifications = #{enable_notifications}" : '' -%>
-
   <%= @period ? "period = \"#{period}\"" : '' -%>
 
   <%= @types ? "types = #{types.to_s.gsub('"', '')}" : '' -%>
   
   <%= @states ? "states = #{states.to_s.gsub('"', '')}" : '' -%>
+
+  enable_notifications = <%= @enable_notifications %>
 
 }
 

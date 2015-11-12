@@ -19,7 +19,7 @@ define icinga2::service (
   $check_period             = undef,
   $check_interval           = undef,
   $retry_interval           = undef,
-  $enable_notifications     = undef,
+  $enable_notifications     = true,
   $enable_active_checks     = undef,
   $enable_passive_checks    = undef,
   $enable_event_handler     = undef,
