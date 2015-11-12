@@ -20,6 +20,8 @@ apply Notification "<%= @name %>" <%= @apply_to ? "to #{apply_to}" : '' %> {
   vars += <%= scope.function_hash2ic([@vars, []]).join(' ') %>
 <% end -%>
 
+  <%= @command ? "command = \"#{command}\"" : '' -%>
+
   <%= @host_name ? "host_name = \"#{host_name}\"" : '' -%>
 
   <%= @service_name ? "service_name = \"#{service_name}\"" : '' -%>
@@ -28,11 +30,9 @@ apply Notification "<%= @name %>" <%= @apply_to ? "to #{apply_to}" : '' %> {
   
   <%= @user_groups ? "user_groups = #{user_groups}" : '' -%>
   
-  <%= @times ? "times = \"#{times}\"" : '' -%>
+  <%= @times ? "times = #{times}" : '' -%>
   
-  <%= @command ? "command = \"#{command}\"" : '' -%>
-
-  <%= @interval ? "interval = \"#{interval}\"" : '' -%>
+  <%= @interval ? "interval = #{interval}" : '' -%>
 
   <%= @period ? "period = \"#{period}\"" : '' -%>
 
