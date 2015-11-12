@@ -31,7 +31,7 @@ define icinga2::downtime (
       $type_state = [ 'OK', 'Warning' ]
     }
     default: {
-      fail("Invalid option: $apply_to"}
+      fail("Invalid option: $apply_to")
     }
   }
 

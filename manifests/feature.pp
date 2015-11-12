@@ -6,7 +6,7 @@ define icinga2::feature (
   $real_ensure = $ensure ? {
     /(enable|enabled)/   => 'enable',
     /(disable|disabled)/ => 'disable',
-    default              => fail("No such option: ${ensure}"),
+    default              => 'enable',
   }
 
   $exec_condition = $real_ensure ? {
