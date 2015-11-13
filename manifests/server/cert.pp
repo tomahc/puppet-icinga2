@@ -61,7 +61,7 @@ class icinga2::server::cert (
 
     exec { 'save-master-ca':
       path    => [ '/bin', '/usr/bin', '/usr/sbin' ],
-      command => "sudo -H -u nagios cp ${confdir}/pki/ca.crt /var/lib/icinga2/ca/ca.crt",
+      command => "sudo -H -u ${service_user} cp ${confdir}/pki/ca.crt /var/lib/icinga2/ca/ca.crt",
       unless  => "diff ${confdir}/pki/ca.crt /var/lib/icinga2/ca/ca.crt",
     }
   } else {
@@ -70,7 +70,7 @@ class icinga2::server::cert (
 
     exec { 'request-master-cert':
       path    => [ '/usr/sbin', '/usr/bin' ],
-      command => "sudo -H -u nagios icinga2 pki save-cert --key ${confdir}/pki/${::fqdn}.key --cert ${confdir}/pki/${::fqdn}.crt --trustedcert ${confdir}/pki/trusted-master.crt --host ${master}",
+      command => "sudo -H -u ${service_user} icinga2 pki save-cert --key ${confdir}/pki/${::fqdn}.key --cert ${confdir}/pki/${::fqdn}.crt --trustedcert ${confdir}/pki/trusted-master.crt --host ${master}",
       creates => "${confdir}/pki/trusted-master.crt",
     }
 
@@ -91,7 +91,7 @@ class icinga2::server::cert (
 
     #exec { 'request-master-ca':
     #  path    => [ '/usr/sbin', '/usr/bin' ],
-    #  command => "sudo -H -u nagios icinga2 pki request --host ${master} --key ${confdir}/pki/${::fqdn}.key --cert ${confdir}/pki/${::fqdn}.crt --trustedcert ${confdir}/pki/trusted-master.crt --ca ${confdir}/pki/ca.crt --ticket ${ticket}",
+    #  command => "sudo -H -u ${service_user} icinga2 pki request --host ${master} --key ${confdir}/pki/${::fqdn}.key --cert ${confdir}/pki/${::fqdn}.crt --trustedcert ${confdir}/pki/trusted-master.crt --ca ${confdir}/pki/ca.crt --ticket ${ticket}",
     #  creates => "${confdir}/pki/ca.crt",
     #}->
 
@@ -100,7 +100,7 @@ class icinga2::server::cert (
 
     #exec { "${::fqdn}-endpoint":
     #  path    => [ '/usr/sbin', '/usr/bin' ],
-    #  command => "sudo -H -u nagios icinga2 node setup --endpoint ${::fqdn} --zone ${::fqdn} --master_host ${master} --trustedcert ${confdir}/pki/trusted-master.crt --ticket ${ticket}",
+    #  command => "sudo -H -u ${service_user} icinga2 node setup --endpoint ${::fqdn} --zone ${::fqdn} --master_host ${master} --trustedcert ${confdir}/pki/trusted-master.crt --ticket ${ticket}",
     #}
   }
 }
