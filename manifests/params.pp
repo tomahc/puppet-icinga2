@@ -6,21 +6,30 @@ class icinga2::params inherits icinga2::globals {
       $server_service                     = pick($icinga2::globals::server_service, 'icinga2')
       $service_user                       = pick($icinga2::globals::service_user, 'nagios')
       $service_group                      = pick($icinga2::globals::service_group, 'nagios')
-      $confdir                            = pick($icinga2::globals::confdir, '/etc/icinga2')
+
+      # constants
+      $plugindir                          = pick($icinga2::globals::plugindir, '/usr/lib/nagios/plugins')
+      $manubulonplugindir                 = pick($icinga2::globals::manubulonplugindir, '/usr/lib/nagios/plugins')
+      $plugincontribdir                   = pick($icinga2::globals::plugincontribdir, '/usr/lib/nagios/plugins')
     }
     'RedHat': {
       $server_package                     = pick($icinga2::globals::server_package, 'icinga2')
       $server_service                     = pick($icinga2::globals::server_service, 'icinga2')
       $service_user                       = pick($icinga2::globals::service_user, 'icinga')
       $service_group                      = pick($icinga2::globals::service_group, 'icinga')
-      $confdir                            = pick($icinga2::globals::confdir, '/etc/icinga2')
+
+      # constants
+      $plugindir                          = pick($icinga2::globals::plugindir, '/usr/lib64/nagios/plugins')
+      $manubulonplugindir                 = pick($icinga2::globals::manubulonplugindir, '/usr/lib64/nagios/plugins')
+      $plugincontribdir                   = pick($icinga2::globals::plugincontribdir, '/usr/lib64/nagios/plugins')
     }
   }
 
+  $confdir                                = pick($icinga2::globals::confdir, '/etc/icinga2')
   $server_config                          = "${confdir}/icinga2.conf"
 
-  $include_files                          = $icinga2::globals::include_files
-  $include_directories                    = $icinga2::globals::include_directories
+  $include_files                          = pick($icinga2::globals::include_files, ['constants.conf', 'zones.conf', 'features-enabled/*.conf'])
+  $include_directories                    = pick($icinga2::globals::include_directories, ['repository.d', 'conf.d'])
 
   $is_master                              = true
   $use_puppet_ca                          = true
@@ -44,13 +53,9 @@ class icinga2::params inherits icinga2::globals {
   $servicegroup_configs                   = 'servicegroups.d'
 
   # constants
-  $plugindir                              = $icinga2::globals::plugindir
-  $manubulonplugindir                     = $icinga2::globals::manubulonplugindir
-  $plugincontribdir                       = $icinga2::globals::plugincontribdir
-  $zonename                               = $icinga2::globals::zonename
+  $zonename                               = pick($icinga2::globals::zonename, $::fqdn)
+  $nodename                               = pick($icinga2::globals::nodename, $::fqdn)
   $ticketsalt                             = $icinga2::globals::ticketsalt
-  $nodename                               = $icinga2::globals::nodename
-
 
   # api
   $cert_path                              = 'SysconfDir + "/icinga2/pki/" + NodeName + ".crt"'

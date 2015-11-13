@@ -1,21 +1,21 @@
 class icinga2::globals (
-  $server_package                         = 'icinga2',
-  $server_service                         = 'icinga2',
+  $server_package                         = undef,
+  $server_service                         = undef,
 
   $service_user                           = undef,
   $service_group                          = undef,
 
-  $confdir                                = '/etc/icinga2',
+  $confdir                                = undef,
   
-  $include_files                          = ['constants.conf', 'zones.conf', 'features-enabled/*.conf'],
-  $include_directories                    = ['repository.d', 'conf.d'],
+  $include_files                          = undef,
+  $include_directories                    = undef,
 
   # constants
-  $plugindir                              = '/usr/lib/nagios/plugins',
-  $manubulonplugindir                     = '/usr/lib/nagios/plugins',
-  $plugincontribdir                       = '/usr/lib/nagios/plugins',
-  $zonename                               = $::fqdn,
-  $nodename                               = $::fqdn,
+  $plugindir                              = undef,
+  $manubulonplugindir                     = undef,
+  $plugincontribdir                       = undef,
+  $zonename                               = undef,
+  $nodename                               = undef,
   $ticketsalt                             = undef,
 ) {
 }
