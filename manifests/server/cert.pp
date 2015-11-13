@@ -6,6 +6,9 @@ class icinga2::server::cert (
   $master, 
   $is_master                  = false,
   $confdir                    = $icinga2::server::confdir,
+
+  $service_user               = $icinga2::server::service_user,
+  $service_group              = $icinga2::server::service_group,
   $service                    = $icinga2::server::service,
 ) {
 
@@ -18,32 +21,32 @@ class icinga2::server::cert (
   file { 'fix-pki-directory-permissions':
     ensure => directory,
     path   => "${confdir}/pki",
-    owner  => 'nagios',
-    group  => 'nagios',
+    owner  => $service_user,
+    group  => $service_group,
     mode   => '0755',
   }
 
   file  { 'copy-puppet-cert':
     ensure => $real_ensure,
     path   => "${confdir}/pki/${::fqdn}.crt",
-    owner  => 'nagios',
-    group  => 'nagios',
+    owner  => $service_user,
+    group  => $service_group,
     source => "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
   }
 
   file  { 'copy-puppet-key':
     ensure => $real_ensure,
     path   => "${confdir}/pki/${::fqdn}.key",
-    owner  => 'nagios',
-    group  => 'nagios',
+    owner  => $service_user,
+    group  => $service_group,
     source => "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
   }
 
   file  { 'copy-puppet-ca':
     ensure => $real_ensure,
     path   => "${confdir}/pki/ca.crt",
-    owner  => 'nagios',
-    group  => 'nagios',
+    owner  => $service_user,
+    group  => $service_group,
     source => "/var/lib/puppet/ssl/certs/ca.pem",
   }
 
@@ -51,8 +54,8 @@ class icinga2::server::cert (
 
     file { '/var/lib/icinga2/ca':
       ensure => directory,
-      owner  => $icinga2::server::user,
-      group  => $icinga2::server::group,
+      owner  => $service_user,
+      group  => $service_group,
       mode   => '0755',
     }->
 

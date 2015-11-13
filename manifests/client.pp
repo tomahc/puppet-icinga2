@@ -5,10 +5,10 @@ class icinga2::client (
 
   $use_puppet_ca              = $icinga2::params::use_puppet_ca,
 
-  $service_user               = $icinga2::params::service_user,
-  $service_group              = $icinga2::params::service_group,
   $confdir                    = $icinga2::params::confdir,
 
+  $service_user               = $icinga2::params::service_user,
+  $service_group              = $icinga2::params::service_group,
   $service                    = $icinga2::params::server_service,
 
 ) inherits icinga2::params {
