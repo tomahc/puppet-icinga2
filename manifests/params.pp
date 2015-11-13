@@ -1,9 +1,22 @@
 class icinga2::params inherits icinga2::globals {
-  $server_package                         = $icinga2::globals::server_package
-  $server_service                         = $icinga2::globals::server_service
-  $service_user                           = $icinga2::globals::service_user
-  $service_group                          = $icinga2::globals::service_group
-  $confdir                                = $icinga2::globals::confdir
+
+  case $::osfamily {
+    'Debian': {
+      $server_package                     = pick($icinga2::globals::server_package, 'icinga2')
+      $server_service                     = pick($icinga2::globals::server_service, 'icinga2')
+      $service_user                       = pick($icinga2::globals::service_user, 'nagios')
+      $service_group                      = pick($icinga2::globals::service_group, 'nagios')
+      $confdir                            = pick($icinga2::globals::confdir, '/etc/icinga2')
+    }
+    'RedHat': {
+      $server_package                     = pick($icinga2::globals::server_package, 'icinga2')
+      $server_service                     = pick($icinga2::globals::server_service, 'icinga2')
+      $service_user                       = pick($icinga2::globals::service_user, 'nagios')
+      $service_group                      = pick($icinga2::globals::service_group, 'nagios')
+      $confdir                            = pick($icinga2::globals::confdir, '/etc/icinga2')
+    }
+  }
+
   $server_config                          = "${confdir}/icinga2.conf"
 
   $include_files                          = $icinga2::globals::include_files
