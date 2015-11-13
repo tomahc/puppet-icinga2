@@ -11,8 +11,8 @@ class icinga2::params inherits icinga2::globals {
     'RedHat': {
       $server_package                     = pick($icinga2::globals::server_package, 'icinga2')
       $server_service                     = pick($icinga2::globals::server_service, 'icinga2')
-      $service_user                       = pick($icinga2::globals::service_user, 'nagios')
-      $service_group                      = pick($icinga2::globals::service_group, 'nagios')
+      $service_user                       = pick($icinga2::globals::service_user, 'icinga')
+      $service_group                      = pick($icinga2::globals::service_group, 'icinga')
       $confdir                            = pick($icinga2::globals::confdir, '/etc/icinga2')
     }
   }

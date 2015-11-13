@@ -1,8 +1,10 @@
 class icinga2::globals (
   $server_package                         = 'icinga2',
   $server_service                         = 'icinga2',
-  $service_user                           = 'nagios',
-  $service_group                          = 'nagios',
+
+  $service_user                           = undef,
+  $service_group                          = undef,
+
   $confdir                                = '/etc/icinga2',
   
   $include_files                          = ['constants.conf', 'zones.conf', 'features-enabled/*.conf'],
