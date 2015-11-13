@@ -11,6 +11,8 @@ class icinga2::server (
   $is_master                  = $icinga2::params::is_master,
   $use_puppet_ca              = $icinga2::params::use_puppet_ca,
 
+  $nagios_plugins             = $icinga2::params::nagios_plugins,
+
   $ticketsalt                 = $icinga2::params::ticketsalt,
   $include_files              = $icinga2::params::include_files,
   $include_directories        = $icinga2::params::include_directories,
@@ -50,6 +52,10 @@ class icinga2::server (
   }
 
   icinga2::server::paths { $include_directories: }
+
+  package { $nagios_plugins:
+    ensure => present,
+  }
 
   if $use_puppet_ca {
     class { 'icinga2::server::cert':

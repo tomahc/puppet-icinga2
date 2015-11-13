@@ -11,6 +11,8 @@ class icinga2::params inherits icinga2::globals {
       $plugindir                          = pick($icinga2::globals::plugindir, '/usr/lib/nagios/plugins')
       $manubulonplugindir                 = pick($icinga2::globals::manubulonplugindir, '/usr/lib/nagios/plugins')
       $plugincontribdir                   = pick($icinga2::globals::plugincontribdir, '/usr/lib/nagios/plugins')
+
+      $nagios_plugins                     = pick($icinga2::globals::nagios_plugins, 'nagios-plugins-basic')
     }
     'RedHat': {
       $server_package                     = pick($icinga2::globals::server_package, 'icinga2')
@@ -22,6 +24,8 @@ class icinga2::params inherits icinga2::globals {
       $plugindir                          = pick($icinga2::globals::plugindir, '/usr/lib64/nagios/plugins')
       $manubulonplugindir                 = pick($icinga2::globals::manubulonplugindir, '/usr/lib64/nagios/plugins')
       $plugincontribdir                   = pick($icinga2::globals::plugincontribdir, '/usr/lib64/nagios/plugins')
+
+      $nagios_plugins                     = pick($icinga2::globals::nagios_plugins, 'nagios-plugins-all')
     }
   }
 

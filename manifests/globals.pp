@@ -6,6 +6,8 @@ class icinga2::globals (
   $service_group                          = undef,
 
   $confdir                                = undef,
+
+  $nagios_plugins                         = undef,
   
   $include_files                          = undef,
   $include_directories                    = undef,
