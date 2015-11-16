@@ -10,7 +10,7 @@ class icinga2::params inherits icinga2::globals {
       # constants
       $plugindir                          = pick($icinga2::globals::plugindir, '/usr/lib/nagios/plugins')
       $manubulonplugindir                 = pick($icinga2::globals::manubulonplugindir, '/usr/lib/nagios/plugins')
-      $plugincontribdir                   = pick($icinga2::globals::plugincontribdir, '/usr/lib/nagios/plugins')
+      $plugincontribdir                   = pick($icinga2::globals::plugincontribdir, '/usr/local/lib/nagios/plugins')
 
       $nagios_plugins                     = pick($icinga2::globals::nagios_plugins, 'nagios-plugins-basic')
     }

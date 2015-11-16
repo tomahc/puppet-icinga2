@@ -8,6 +8,8 @@ class icinga2::server (
 
   $master                     = $::fqdn,
 
+  $plugincontribdir           = $icinga2::params::plugincontribdir,
+
   $is_master                  = $icinga2::params::is_master,
   $use_puppet_ca              = $icinga2::params::use_puppet_ca,
 
@@ -64,6 +66,12 @@ class icinga2::server (
       is_master => $is_master,
       require   => Package[$package],
     }
+  }
+
+  exec { "create ${plugincontribdir}":
+    path    => ['/bin', '/usr/bin'],
+    command => "mkdir -p ${plugincontribdir}",
+    unless  => "test -e ${plugincontribdir}",
   }
 
   service { $service:
