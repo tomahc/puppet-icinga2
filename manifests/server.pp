@@ -78,8 +78,10 @@ class icinga2::server (
     ensure  => directory,
     recurse => true,
     purge   => false,
+    owner   => root,
+    group   => root,
     path    => $plugincontribdir,
-    source  => 'icinga2/contrib_plugins',
+    source  => 'puppet:///modules/icinga2/contrib_plugins',
   }
 
   service { $service:
