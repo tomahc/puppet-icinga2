@@ -72,6 +72,14 @@ class icinga2::server (
     path    => ['/bin', '/usr/bin'],
     command => "mkdir -p ${plugincontribdir}",
     unless  => "test -e ${plugincontribdir}",
+  }->
+
+  file { 'contribplugins':
+    ensure  => directory,
+    recurse => true,
+    purge   => false,
+    path    => $plugincontribdir,
+    source  => 'icinga2/contrib_plugins',
   }
 
   service { $service:
