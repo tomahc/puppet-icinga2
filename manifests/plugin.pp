@@ -11,4 +11,15 @@ define icinga2::plugin (
     /(false|absent)/      => 'absent',
     default               => 'file',
   }
+
+  if $remote {
+    file { '$remote':
+      ensure => $real_ensure,
+      path   => $contribdir,
+      owner  => root,
+      group  => root,
+      mode   => '0755',
+      source => $remote,
+    }
+  }
 }
