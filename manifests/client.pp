@@ -55,7 +55,7 @@ class icinga2::client (
   }
 
   class { 'icinga2::server':
-    include_directories => [ 'zones.d', 'endpoints.d' ],
+    include_directories => [ 'zones.d', 'endpoints.d', 'commands.d' ],
     include_files       => ['constants.conf', 'features-enabled/*.conf'], 
     is_master           => false,
     use_puppet_ca       => true,
