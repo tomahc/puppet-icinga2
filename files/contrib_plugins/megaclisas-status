@@ -64,7 +64,7 @@ def get_info(key, input, output_format='string'):
         exit(2)
 
 
-binarypath = '/usr/sbin/megacli'
+binarypath = '/usr/bin/sudo /usr/sbin/megacli'
 something_is_wrong = False
 
 # We are going to put everything into a dictionary
