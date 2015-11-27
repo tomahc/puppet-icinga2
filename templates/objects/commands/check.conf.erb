@@ -21,7 +21,7 @@
 <% if @command -%>
   command = [
   <% command.each do |cmd| -%>
-    <%= @contrib ? "PluginContribDir" : "PluginDir" %> + /"<%= cmd %>",
+    <%= @contrib ? "PluginContribDir" : "PluginDir" %> + "/<%= cmd %>",
   <% end -%>
   ]
 <% end -%>
