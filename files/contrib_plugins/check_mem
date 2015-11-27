@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-
+import sys
 
 MEMINFO = '/proc/meminfo'
 
@@ -36,11 +36,14 @@ def chk_mem(wfree, cfree):
     free_mem = round(tmp.get('MemFree') * 100 / tmp.get('MemTotal'))
 
     if free_mem <= float(wfree):
+        print "MEMORY WARNING - {pmem}% of free Memory left".format(pmem=free_mem)
         return 1
 
     elif free_mem <= float(cfree):
+        print "MEMORY CRITICAL - {pmem}% of free Memory left".format(pmem=free_mem)
         return 2
 
+    print "MEMORY OK - {pmem}% of free Memory left".format(pmem=free_mem)
     return 0
 
 if __name__ == '__main__':
@@ -50,4 +53,4 @@ if __name__ == '__main__':
 
     arguments = vars(parser.parse_args())
 
-    print chk_mem(**arguments)
+    sys.exit(chk_mem(**arguments))
