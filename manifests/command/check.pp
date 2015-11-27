@@ -4,6 +4,8 @@ define icinga2::command::check (
   $is_template              = false,
   $templates                = undef,
 
+  $contrib                  = false,
+
   $execute                  = undef,
   $command                  = undef,
   $env                      = undef,
