@@ -71,12 +71,12 @@ icinga2::service { 'disks':
   groups			=> [ 'basic_services' ],
   loop_condition 	=> 'host.vars.disks',
   check_command 	=> 'disks',
-  assign 			=> 'host.vars.os == "Linux" && host.vars.disks',
-  ignore 			=> 'host.vars.downtime',
+  assign 			=> [ 'host.vars.os == "Linux" && host.vars.disks' ],
+  ignore 			=> [ 'host.vars.downtime' ],
 }
 ```
 
-## Create a custom CheckComand
+## Create a custom CheckCommand
 
 ```
 icinga2::command::check { 'my-check':
